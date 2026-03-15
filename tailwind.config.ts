@@ -54,6 +54,7 @@ export default {
         glow: {
           primary: "hsl(var(--glow-primary))",
           secondary: "hsl(var(--glow-secondary))",
+          accent: "hsl(var(--glow-accent))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -105,8 +106,8 @@ export default {
           "50%": { transform: "translateY(-20px)" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--primary) / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(var(--primary) / 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(210 100% 60% / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(210 100% 60% / 0.6)" },
         },
         "gradient-shift": {
           "0%, 100%": { backgroundPosition: "0% 50%" },
@@ -153,7 +154,7 @@ export default {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "gradient-mesh": "linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, transparent 50%, hsl(var(--secondary) / 0.1) 100%)",
+        "gradient-mesh": "linear-gradient(135deg, hsl(210 100% 60% / 0.1) 0%, transparent 50%, hsl(250 80% 65% / 0.1) 100%)",
       },
     },
   },

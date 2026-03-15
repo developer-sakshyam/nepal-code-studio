@@ -9,6 +9,9 @@ import ProductDetail from "./pages/ProductDetail";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
 import Policies from "./pages/Policies";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Compare from "./pages/Compare";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +27,9 @@ const App = () => (
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/checkout/:id" element={<Checkout />} />
+          <Route path="/compare" element={<Compare />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/policies" element={<Policies />} />
           <Route path="*" element={<NotFound />} />
