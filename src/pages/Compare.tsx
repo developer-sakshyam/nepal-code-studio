@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/Layout";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlassCard } from "@/components/GlassCard";
-import { products, Product } from "@/data/products";
+import { products, allCapabilities, Product } from "@/data/products";
 
 const Compare = () => {
   const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
@@ -27,9 +27,6 @@ const Compare = () => {
     (p) => !selectedProducts.find((sp) => sp.id === p.id)
   );
 
-  const allFeatures = [...new Set(selectedProducts.flatMap((p) => p.features))];
-  const allTech = [...new Set(selectedProducts.flatMap((p) => p.techStack))];
-
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12 md:py-24">
@@ -40,7 +37,7 @@ const Compare = () => {
               Compare <span className="gradient-text">Products</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Select up to 3 products to compare features, tech stacks, and pricing side by side.
+              Select up to 3 products to compare capabilities, tech stacks, and pricing side by side.
             </p>
           </AnimatedSection>
 
@@ -131,7 +128,7 @@ const Compare = () => {
               <div className="overflow-x-auto">
                 <GlassCard className="min-w-[600px]">
                   {/* Header Row */}
-                  <div className={`grid gap-4 pb-6 border-b border-border/50 mb-6`} style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}>
+                  <div className="grid gap-4 pb-6 border-b border-border/50 mb-6" style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}>
                     <div className="font-display font-semibold text-muted-foreground flex items-center gap-2">
                       <GitCompare className="w-5 h-5 text-primary" />
                       Compare
@@ -150,7 +147,7 @@ const Compare = () => {
                   </div>
 
                   {/* Price Row */}
-                  <div className={`grid gap-4 py-4 border-b border-border/30`} style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}>
+                  <div className="grid gap-4 py-4 border-b border-border/30" style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}>
                     <div className="font-medium text-muted-foreground">Price</div>
                     {selectedProducts.map((product) => (
                       <div key={product.id} className="text-center">
@@ -163,7 +160,7 @@ const Compare = () => {
                   </div>
 
                   {/* Tech Stack */}
-                  <div className={`grid gap-4 py-4 border-b border-border/30`} style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}>
+                  <div className="grid gap-4 py-4 border-b border-border/30" style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}>
                     <div className="font-medium text-muted-foreground">Tech Stack</div>
                     {selectedProducts.map((product) => (
                       <div key={product.id} className="text-center">
@@ -181,20 +178,26 @@ const Compare = () => {
                     ))}
                   </div>
 
-                  {/* Features */}
+                  {/* Capabilities - Real comparison */}
                   <div className="mt-4">
-                    <h4 className="font-display font-semibold mb-4">Features</h4>
-                    {allFeatures.map((feature, index) => (
+                    <h4 className="font-display font-semibold mb-4">Capabilities</h4>
+                    {allCapabilities.map((capability, index) => (
                       <div
                         key={index}
-                        className={`grid gap-4 py-3 ${index < allFeatures.length - 1 ? 'border-b border-border/20' : ''}`}
+                        className={`grid gap-4 py-3 ${index < allCapabilities.length - 1 ? 'border-b border-border/20' : ''}`}
                         style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}
                       >
-                        <div className="text-sm text-muted-foreground">{feature}</div>
+                        <div className="text-sm text-muted-foreground">{capability}</div>
                         {selectedProducts.map((product) => (
                           <div key={product.id} className="text-center">
-                            {product.features.includes(feature) ? (
-                              <Check className="w-5 h-5 text-primary mx-auto" />
+                            {product.capabilities.includes(capability) ? (
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: index * 0.02 }}
+                              >
+                                <Check className="w-5 h-5 text-primary mx-auto" />
+                              </motion.div>
                             ) : (
                               <X className="w-5 h-5 text-muted-foreground/30 mx-auto" />
                             )}
@@ -205,7 +208,7 @@ const Compare = () => {
                   </div>
 
                   {/* CTA Row */}
-                  <div className={`grid gap-4 pt-6 mt-6 border-t border-border/50`} style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}>
+                  <div className="grid gap-4 pt-6 mt-6 border-t border-border/50" style={{ gridTemplateColumns: `200px repeat(${selectedProducts.length}, 1fr)` }}>
                     <div />
                     {selectedProducts.map((product) => (
                       <div key={product.id} className="text-center">
