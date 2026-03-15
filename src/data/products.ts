@@ -7,10 +7,31 @@ export interface Product {
   priceUSD: number;
   techStack: string[];
   features: string[];
+  capabilities: string[];
   category: string;
   image: string;
   featured: boolean;
 }
+
+// Shared capability keys used for real comparison
+export const allCapabilities = [
+  "Fully Responsive Design",
+  "Dark/Light Mode",
+  "Authentication System",
+  "User Management",
+  "Analytics Dashboard",
+  "Data Tables",
+  "Form Validation",
+  "Shopping Cart",
+  "Search & Filters",
+  "Drag & Drop",
+  "Animations & Transitions",
+  "SEO Optimized",
+  "Markdown/MDX Support",
+  "API Integration Ready",
+  "Performance Optimized",
+  "Clean Documented Code",
+];
 
 export const products: Product[] = [
   {
@@ -30,6 +51,18 @@ export const products: Product[] = [
       "Data tables with sorting/filtering",
       "Form components with validation",
       "Clean, documented code"
+    ],
+    capabilities: [
+      "Fully Responsive Design",
+      "Dark/Light Mode",
+      "Authentication System",
+      "User Management",
+      "Analytics Dashboard",
+      "Data Tables",
+      "Form Validation",
+      "API Integration Ready",
+      "Performance Optimized",
+      "Clean Documented Code",
     ],
     category: "Dashboard",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
@@ -53,6 +86,17 @@ export const products: Product[] = [
       "Responsive mobile design",
       "SEO optimized structure"
     ],
+    capabilities: [
+      "Fully Responsive Design",
+      "Shopping Cart",
+      "Search & Filters",
+      "Animations & Transitions",
+      "SEO Optimized",
+      "Form Validation",
+      "API Integration Ready",
+      "Performance Optimized",
+      "Clean Documented Code",
+    ],
     category: "E-Commerce",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
     featured: true,
@@ -74,6 +118,16 @@ export const products: Product[] = [
       "Social media integration",
       "Performance optimized",
       "Easy to customize"
+    ],
+    capabilities: [
+      "Fully Responsive Design",
+      "Dark/Light Mode",
+      "Animations & Transitions",
+      "SEO Optimized",
+      "Markdown/MDX Support",
+      "Form Validation",
+      "Performance Optimized",
+      "Clean Documented Code",
     ],
     category: "Portfolio",
     image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&h=600&fit=crop",
@@ -97,6 +151,14 @@ export const products: Product[] = [
       "RSS feed ready",
       "SEO optimized"
     ],
+    capabilities: [
+      "Fully Responsive Design",
+      "Search & Filters",
+      "Markdown/MDX Support",
+      "SEO Optimized",
+      "Performance Optimized",
+      "Clean Documented Code",
+    ],
     category: "Blog",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop",
     featured: false,
@@ -119,6 +181,14 @@ export const products: Product[] = [
       "Mobile responsive",
       "Fast load times"
     ],
+    capabilities: [
+      "Fully Responsive Design",
+      "Animations & Transitions",
+      "SEO Optimized",
+      "Form Validation",
+      "Performance Optimized",
+      "Clean Documented Code",
+    ],
     category: "Landing Page",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
     featured: false,
@@ -140,6 +210,15 @@ export const products: Product[] = [
       "Team member assignment",
       "Board customization",
       "Activity timeline"
+    ],
+    capabilities: [
+      "Fully Responsive Design",
+      "Drag & Drop",
+      "Search & Filters",
+      "Animations & Transitions",
+      "API Integration Ready",
+      "Performance Optimized",
+      "Clean Documented Code",
     ],
     category: "Productivity",
     image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",

@@ -106,8 +106,8 @@ export default {
           "50%": { transform: "translateY(-20px)" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(210 100% 60% / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(210 100% 60% / 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(160 60% 50% / 0.2)" },
+          "50%": { boxShadow: "0 0 40px hsl(160 60% 50% / 0.4)" },
         },
         "gradient-shift": {
           "0%, 100%": { backgroundPosition: "0% 50%" },
@@ -154,7 +154,7 @@ export default {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "gradient-mesh": "linear-gradient(135deg, hsl(210 100% 60% / 0.1) 0%, transparent 50%, hsl(250 80% 65% / 0.1) 100%)",
+        "gradient-mesh": "linear-gradient(135deg, hsl(160 60% 50% / 0.08) 0%, transparent 50%, hsl(270 50% 60% / 0.08) 100%)",
       },
     },
   },

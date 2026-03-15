@@ -15,7 +15,6 @@ const quickLinks = [
   { href: "/", label: "Home" },
   { href: "/products", label: "Products" },
   { href: "/compare", label: "Compare" },
-  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
   { href: "/policies", label: "Policies" },
 ];
@@ -23,12 +22,10 @@ const quickLinks = [
 export const Footer = () => {
   return (
     <footer className="relative border-t border-border/30 bg-background/40 backdrop-blur-xl">
-      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-4 py-12 md:py-16 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
           <AnimatedSection animation="fade-up" delay={0}>
             <div className="space-y-4">
               <Link to="/" className="flex items-center gap-2 group">
@@ -53,7 +50,6 @@ export const Footer = () => {
             </div>
           </AnimatedSection>
 
-          {/* Quick Links */}
           <AnimatedSection animation="fade-up" delay={0.1}>
             <div className="space-y-4">
               <h4 className="font-display font-semibold text-foreground">Quick Links</h4>
@@ -72,7 +68,6 @@ export const Footer = () => {
             </div>
           </AnimatedSection>
 
-          {/* Tech Stack */}
           <AnimatedSection animation="fade-up" delay={0.2}>
             <div className="space-y-4">
               <h4 className="font-display font-semibold text-foreground">Built With</h4>
@@ -90,7 +85,6 @@ export const Footer = () => {
             </div>
           </AnimatedSection>
 
-          {/* Developer Info */}
           <AnimatedSection animation="fade-up" delay={0.3}>
             <div className="space-y-4">
               <h4 className="font-display font-semibold text-foreground">Developer</h4>
@@ -131,7 +125,6 @@ export const Footer = () => {
           </AnimatedSection>
         </div>
 
-        {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border/30">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>© {new Date().getFullYear()} CodeVault. All rights reserved.</p>
