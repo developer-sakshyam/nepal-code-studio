@@ -6,81 +6,84 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    --background: 220 25% 5%;
+    --foreground: 210 40% 96%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 30% 8%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 30% 8%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 173 80% 50%;
-    --primary-foreground: 222 47% 6%;
+    --primary: 210 100% 60%;
+    --primary-foreground: 220 25% 5%;
 
-    --secondary: 265 60% 55%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 250 80% 65%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 222 40% 15%;
+    --muted: 220 25% 14%;
     --muted-foreground: 215 20% 55%;
 
-    --accent: 173 80% 40%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 195 100% 50%;
+    --accent-foreground: 210 40% 96%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 210 40% 96%;
 
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 173 80% 50%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 210 100% 60%;
 
     --radius: 0.75rem;
 
-    /* Custom design tokens */
-    --glow-primary: 173 80% 50%;
-    --glow-secondary: 265 60% 55%;
-    --gradient-start: 173 80% 50%;
-    --gradient-end: 265 60% 55%;
+    /* Custom design tokens - Blueish Neon */
+    --glow-primary: 210 100% 60%;
+    --glow-secondary: 250 80% 65%;
+    --glow-accent: 195 100% 50%;
+    --gradient-start: 210 100% 60%;
+    --gradient-end: 250 80% 65%;
     
     /* Glass effect */
-    --glass-bg: 222 47% 10% / 0.6;
-    --glass-border: 222 30% 25%;
+    --glass-bg: 220 30% 12% / 0.4;
+    --glass-border: 210 40% 30% / 0.3;
+    --glass-shine: 210 100% 80% / 0.08;
     
     /* Shadows */
-    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
-    --shadow-card: 0 25px 50px -12px hsl(222 47% 3% / 0.5);
-    --shadow-card-hover: 0 35px 60px -15px hsl(222 47% 3% / 0.7);
+    --shadow-glow: 0 0 40px hsl(210 100% 60% / 0.25);
+    --shadow-card: 0 25px 50px -12px hsl(220 25% 2% / 0.5);
+    --shadow-card-hover: 0 35px 60px -15px hsl(220 25% 2% / 0.7);
+    --shadow-neon: 0 0 15px hsl(210 100% 60% / 0.3), 0 0 45px hsl(210 100% 60% / 0.1);
 
-    --sidebar-background: 222 47% 6%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 173 80% 50%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 40% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 173 80% 50%;
+    --sidebar-background: 220 25% 5%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 210 100% 60%;
+    --sidebar-primary-foreground: 220 25% 5%;
+    --sidebar-accent: 220 25% 14%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 210 100% 60%;
   }
 
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 173 80% 50%;
-    --primary-foreground: 222 47% 6%;
-    --secondary: 265 60% 55%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 222 40% 15%;
+    --background: 220 25% 5%;
+    --foreground: 210 40% 96%;
+    --card: 220 30% 8%;
+    --card-foreground: 210 40% 96%;
+    --popover: 220 30% 8%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 210 100% 60%;
+    --primary-foreground: 220 25% 5%;
+    --secondary: 250 80% 65%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 220 25% 14%;
     --muted-foreground: 215 20% 55%;
-    --accent: 173 80% 40%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 195 100% 50%;
+    --accent-foreground: 210 40% 96%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 173 80% 50%;
+    --destructive-foreground: 210 40% 96%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 210 100% 60%;
   }
 }
 
@@ -112,15 +115,41 @@
 
 @layer components {
   .glass-card {
-    @apply bg-card/60 backdrop-blur-xl border border-border/50 rounded-xl;
+    @apply rounded-xl;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-shine)),
+      hsl(220 30% 12% / 0.5),
+      hsl(220 30% 8% / 0.6)
+    );
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid hsl(210 40% 40% / 0.15);
+    box-shadow:
+      inset 0 1px 0 0 hsl(210 100% 80% / 0.06),
+      0 8px 32px hsl(220 25% 2% / 0.4);
+  }
+
+  .glass-card:hover {
+    border-color: hsl(210 100% 60% / 0.25);
+    box-shadow:
+      inset 0 1px 0 0 hsl(210 100% 80% / 0.1),
+      0 8px 32px hsl(220 25% 2% / 0.4),
+      0 0 20px hsl(210 100% 60% / 0.08);
   }
 
   .glow-text {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+    text-shadow: 0 0 20px hsl(210 100% 60% / 0.5);
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(195 100% 50%),
+      hsl(210 100% 60%),
+      hsl(250 80% 65%)
+    );
   }
 
   .animated-underline {
@@ -129,7 +158,8 @@
 
   .animated-underline::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-transform duration-300;
+    @apply absolute bottom-0 left-0 w-full h-0.5 scale-x-0 origin-right transition-transform duration-300;
+    background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--primary)));
   }
 
   .animated-underline:hover::after {
@@ -148,6 +178,104 @@
   .card-3d {
     transform-style: preserve-3d;
     perspective: 1000px;
+  }
+
+  /* iOS Liquid Glass Button */
+  .liquid-glass-btn {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      hsl(210 100% 80% / 0.12),
+      hsl(210 100% 60% / 0.08),
+      hsl(250 80% 65% / 0.06)
+    );
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    border: 1px solid hsl(210 100% 80% / 0.2);
+    box-shadow:
+      inset 0 1px 0 0 hsl(210 100% 90% / 0.15),
+      inset 0 -1px 0 0 hsl(220 30% 10% / 0.2),
+      0 4px 16px hsl(210 100% 60% / 0.15);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .liquid-glass-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      hsl(210 100% 90% / 0.0) 0%,
+      hsl(210 100% 90% / 0.08) 40%,
+      hsl(210 100% 90% / 0.0) 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .liquid-glass-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at 30% 30%,
+      hsl(210 100% 80% / 0.15),
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .liquid-glass-btn:hover {
+    border-color: hsl(210 100% 70% / 0.35);
+    box-shadow:
+      inset 0 1px 0 0 hsl(210 100% 90% / 0.2),
+      inset 0 -1px 0 0 hsl(220 30% 10% / 0.3),
+      0 8px 32px hsl(210 100% 60% / 0.25),
+      0 0 20px hsl(210 100% 60% / 0.1);
+    transform: translateY(-1px);
+  }
+
+  .liquid-glass-btn:hover::before {
+    opacity: 1;
+  }
+
+  .liquid-glass-btn:hover::after {
+    opacity: 1;
+  }
+
+  .liquid-glass-btn:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow:
+      inset 0 2px 4px hsl(220 30% 5% / 0.3),
+      0 2px 8px hsl(210 100% 60% / 0.15);
+  }
+
+  /* Solid liquid glass variant */
+  .liquid-glass-solid {
+    background: linear-gradient(
+      135deg,
+      hsl(210 100% 60% / 0.85),
+      hsl(220 90% 55% / 0.9),
+      hsl(250 80% 60% / 0.85)
+    );
+    border: 1px solid hsl(210 100% 70% / 0.3);
+    box-shadow:
+      inset 0 1px 0 0 hsl(210 100% 90% / 0.25),
+      0 4px 16px hsl(210 100% 50% / 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .liquid-glass-solid:hover {
+    box-shadow:
+      inset 0 1px 0 0 hsl(210 100% 90% / 0.3),
+      0 8px 32px hsl(210 100% 50% / 0.4),
+      0 0 30px hsl(210 100% 60% / 0.2);
   }
 }
 

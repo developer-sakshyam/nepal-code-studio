@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/products", label: "Products" },
+  { href: "/compare", label: "Compare" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
   { href: "/policies", label: "Policies" },
 ];
@@ -38,7 +40,7 @@ export const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
+          ? "bg-background/60 backdrop-blur-2xl border-b border-border/30"
           : "bg-transparent"
       )}
     >
@@ -49,9 +51,9 @@ export const Navbar = () => {
             <motion.div
               whileHover={{ rotate: 180 }}
               transition={{ duration: 0.5 }}
-              className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary"
+              className="p-2 rounded-xl liquid-glass-solid"
             >
-              <Code2 className="w-5 h-5 text-primary-foreground" />
+              <Code2 className="w-5 h-5 text-foreground" />
             </motion.div>
             <span className="font-display font-bold text-xl gradient-text">
               CodeVault
@@ -59,13 +61,13 @@ export const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  "animated-underline font-medium transition-colors duration-300",
+                  "animated-underline font-medium transition-colors duration-300 text-sm",
                   location.pathname === link.href
                     ? "text-primary"
                     : "text-muted-foreground hover:text-foreground"
@@ -89,7 +91,7 @@ export const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            className="md:hidden p-2 rounded-xl hover:bg-muted/50 transition-colors"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -104,7 +106,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border"
+            className="md:hidden bg-background/80 backdrop-blur-2xl border-b border-border/30"
           >
             <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
               {navLinks.map((link, index) => (

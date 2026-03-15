@@ -14,13 +14,15 @@ const techStack = [
 const quickLinks = [
   { href: "/", label: "Home" },
   { href: "/products", label: "Products" },
+  { href: "/compare", label: "Compare" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
   { href: "/policies", label: "Policies" },
 ];
 
 export const Footer = () => {
   return (
-    <footer className="relative border-t border-border/50 bg-card/30">
+    <footer className="relative border-t border-border/30 bg-background/40 backdrop-blur-xl">
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
 
@@ -33,9 +35,9 @@ export const Footer = () => {
                 <motion.div
                   whileHover={{ rotate: 180 }}
                   transition={{ duration: 0.5 }}
-                  className="p-2 rounded-lg bg-gradient-to-br from-primary to-secondary"
+                  className="p-2 rounded-xl liquid-glass-solid"
                 >
-                  <Code2 className="w-5 h-5 text-primary-foreground" />
+                  <Code2 className="w-5 h-5 text-foreground" />
                 </motion.div>
                 <span className="font-display font-bold text-xl gradient-text">
                   CodeVault
@@ -79,7 +81,7 @@ export const Footer = () => {
                   <motion.span
                     key={tech}
                     whileHover={{ scale: 1.05 }}
-                    className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground border border-border/50"
+                    className="px-3 py-1 text-xs rounded-full bg-muted/50 text-muted-foreground border border-border/30"
                   >
                     {tech}
                   </motion.span>
@@ -101,7 +103,7 @@ export const Footer = () => {
                   <motion.a
                     href="mailto:contact@example.com"
                     whileHover={{ scale: 1.1, y: -2 }}
-                    className="p-2 rounded-lg bg-muted hover:bg-primary/20 transition-colors"
+                    className="p-2 rounded-xl liquid-glass-btn"
                   >
                     <Mail className="w-4 h-4" />
                   </motion.a>
@@ -110,7 +112,7 @@ export const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
-                    className="p-2 rounded-lg bg-muted hover:bg-primary/20 transition-colors"
+                    className="p-2 rounded-xl liquid-glass-btn"
                   >
                     <Github className="w-4 h-4" />
                   </motion.a>
@@ -119,7 +121,7 @@ export const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
-                    className="p-2 rounded-lg bg-muted hover:bg-primary/20 transition-colors"
+                    className="p-2 rounded-xl liquid-glass-btn"
                   >
                     <Linkedin className="w-4 h-4" />
                   </motion.a>
@@ -130,7 +132,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border/50">
+        <div className="mt-12 pt-8 border-t border-border/30">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>© {new Date().getFullYear()} CodeVault. All rights reserved.</p>
             <p className="flex items-center gap-1">
