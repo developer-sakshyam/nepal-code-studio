@@ -28,6 +28,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const product = products.find((p) => p.id === id);
 
@@ -54,8 +55,13 @@ const Checkout = () => {
     }, 2000);
   };
 
-  const handleDownload = () => {
-    downloadProductCode(product);
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      await downloadProductCode(product!);
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
