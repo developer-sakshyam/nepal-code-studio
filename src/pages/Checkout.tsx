@@ -15,11 +15,7 @@ import { Layout } from "@/components/Layout";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlassCard } from "@/components/GlassCard";
 import { products } from "@/data/products";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { downloadProductCode } from "@/utils/generateProductCode";
 
 const steps = [
   { id: 1, name: "Order Review" },
@@ -52,11 +48,14 @@ const Checkout = () => {
 
   const handlePayment = () => {
     setIsProcessing(true);
-    // Simulate payment processing
     setTimeout(() => {
       setIsProcessing(false);
       setCurrentStep(3);
     }, 2000);
+  };
+
+  const handleDownload = () => {
+    downloadProductCode(product);
   };
 
   return (
@@ -79,13 +78,13 @@ const Checkout = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 p-4 rounded-xl bg-secondary/20 border border-secondary/30 mb-8"
+            className="flex items-center gap-3 p-4 rounded-2xl bg-secondary/20 border border-secondary/30 mb-8"
           >
             <AlertCircle className="w-5 h-5 text-secondary flex-shrink-0" />
             <div>
               <p className="font-medium text-foreground">Demo Checkout</p>
               <p className="text-sm text-muted-foreground">
-                This is a demo checkout flow. No real payment will be processed.
+                This is a demo checkout flow. No real payment will be processed. You can download demo source code after completing.
               </p>
             </div>
           </motion.div>
@@ -95,7 +94,6 @@ const Checkout = () => {
         <AnimatedSection delay={0.2}>
           <div className="mb-12">
             <div className="flex items-center justify-between relative">
-              {/* Progress line */}
               <div className="absolute top-5 left-0 right-0 h-0.5 bg-border" />
               <motion.div
                 className="absolute top-5 left-0 h-0.5 bg-primary"
@@ -110,7 +108,6 @@ const Checkout = () => {
                 }}
                 transition={{ duration: 0.5 }}
               />
-
               {steps.map((step) => (
                 <div
                   key={step.id}
@@ -169,8 +166,6 @@ const Checkout = () => {
                 <h2 className="font-display font-bold text-2xl mb-6">
                   Order Review
                 </h2>
-
-                {/* Product Summary */}
                 <div className="flex items-start gap-4 pb-6 border-b border-border/50">
                   <img
                     src={product.image}
@@ -188,7 +183,7 @@ const Checkout = () => {
                       {product.techStack.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="px-2 py-0.5 text-xs rounded bg-muted text-muted-foreground"
+                          className="px-2 py-0.5 text-xs rounded-full bg-muted text-muted-foreground"
                         >
                           {tech}
                         </span>
@@ -196,8 +191,6 @@ const Checkout = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Price Breakdown */}
                 <div className="py-6 space-y-3">
                   <div className="flex justify-between text-muted-foreground">
                     <span>Subtotal</span>
@@ -217,7 +210,6 @@ const Checkout = () => {
                     (~${product.priceUSD} USD)
                   </p>
                 </div>
-
                 <Button
                   variant="hero"
                   size="lg"
@@ -243,14 +235,12 @@ const Checkout = () => {
                 <h2 className="font-display font-bold text-2xl mb-6">
                   Payment Method
                 </h2>
-
-                {/* eSewa Option */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="p-4 rounded-xl border-2 border-primary bg-primary/5 cursor-pointer mb-6"
+                  className="p-4 rounded-2xl border-2 border-primary bg-primary/5 cursor-pointer mb-6"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-xl bg-[#60BB46] flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-2xl bg-[#60BB46] flex items-center justify-center">
                       <span className="font-bold text-white text-lg">eSewa</span>
                     </div>
                     <div>
@@ -262,23 +252,16 @@ const Checkout = () => {
                     <Check className="w-6 h-6 text-primary ml-auto" />
                   </div>
                 </motion.div>
-
-                {/* Demo Notice */}
                 <div className="flex items-center gap-2 text-muted-foreground text-sm mb-6">
                   <Lock className="w-4 h-4" />
-                  <span>
-                    Demo mode — no actual payment will be processed
-                  </span>
+                  <span>Demo mode — no actual payment will be processed</span>
                 </div>
-
-                {/* Summary */}
                 <div className="flex justify-between items-center py-4 border-t border-border/50 mb-6">
                   <span className="text-muted-foreground">Total to pay</span>
                   <span className="font-display font-bold text-2xl text-primary">
                     NPR {product.price.toLocaleString()}
                   </span>
                 </div>
-
                 <div className="flex gap-4">
                   <Button
                     variant="outline"
@@ -299,7 +282,7 @@ const Checkout = () => {
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full"
+                        className="w-5 h-5 border-2 border-foreground border-t-transparent rounded-full"
                       />
                     ) : (
                       <>
@@ -333,9 +316,6 @@ const Checkout = () => {
                   <motion.svg
                     viewBox="0 0 50 50"
                     className="w-12 h-12"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
                   >
                     <motion.path
                       d="M14 27l7 7 16-16"
@@ -361,31 +341,22 @@ const Checkout = () => {
                     Demo Purchase Complete!
                   </h2>
                   <p className="text-muted-foreground mb-8">
-                    In a real purchase, you would receive the source code via email.
+                    Your demo source code is ready to download. This contains sample code for <strong className="text-foreground">{product.name}</strong>.
                   </p>
 
-                  {/* Download Button (Disabled) */}
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="inline-block">
-                        <Button
-                          variant="hero"
-                          size="lg"
-                          disabled
-                          className="opacity-50 cursor-not-allowed"
-                        >
-                          <Download className="w-5 h-5" />
-                          Download Source Code
-                        </Button>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Payment system is in demo mode</p>
-                    </TooltipContent>
-                  </Tooltip>
+                  {/* Download Button - Now functional */}
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    onClick={handleDownload}
+                    className="group"
+                  >
+                    <Download className="w-5 h-5 group-hover:animate-bounce-subtle" />
+                    Download Source Code
+                  </Button>
 
                   <p className="text-xs text-muted-foreground mt-4">
-                    Download disabled — this is a demo checkout
+                    Demo source code file • {product.techStack.join(", ")}
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
