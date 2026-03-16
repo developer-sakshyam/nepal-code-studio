@@ -54,8 +54,15 @@ const Checkout = () => {
     }, 2000);
   };
 
-  const handleDownload = () => {
-    downloadProductCode(product);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      await downloadProductCode(product);
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
