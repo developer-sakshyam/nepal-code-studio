@@ -179,117 +179,147 @@
     perspective: 1000px;
   }
 
-  /* Transparent Liquid Glass Button */
+  /* iOS 26 Liquid Glass Button */
   .liquid-glass-btn {
     position: relative;
     overflow: hidden;
     background: linear-gradient(
-      135deg,
-      hsl(0 0% 100% / 0.08),
-      hsl(0 0% 100% / 0.04),
-      hsl(0 0% 100% / 0.02)
+      160deg,
+      hsl(0 0% 100% / 0.12),
+      hsl(0 0% 100% / 0.05) 40%,
+      hsl(0 0% 100% / 0.02) 60%,
+      hsl(0 0% 100% / 0.08)
     );
-    backdrop-filter: blur(30px) saturate(1.6);
-    -webkit-backdrop-filter: blur(30px) saturate(1.6);
-    border: 1px solid hsl(0 0% 100% / 0.12);
+    backdrop-filter: blur(40px) saturate(1.8);
+    -webkit-backdrop-filter: blur(40px) saturate(1.8);
+    border: 1px solid hsl(0 0% 100% / 0.15);
+    border-radius: 100px;
     box-shadow:
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.1),
-      inset 0 -1px 0 0 hsl(0 0% 0% / 0.1),
-      0 4px 16px hsl(0 0% 0% / 0.2);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      inset 0 1px 1px 0 hsl(0 0% 100% / 0.12),
+      inset 0 -0.5px 0 0 hsl(0 0% 0% / 0.08),
+      0 2px 8px hsl(0 0% 0% / 0.12),
+      0 0 0 0.5px hsl(0 0% 100% / 0.06);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
+  /* Liquid surface highlight */
   .liquid-glass-btn::before {
     content: '';
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
     background: linear-gradient(
-      135deg,
-      hsl(0 0% 100% / 0.0) 0%,
-      hsl(0 0% 100% / 0.08) 40%,
-      hsl(0 0% 100% / 0.0) 60%
+      180deg,
+      hsl(0 0% 100% / 0.15),
+      hsl(0 0% 100% / 0.0)
     );
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    border-radius: 100px 100px 50% 50%;
+    opacity: 0.8;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
+  /* Liquid drop ripple on hover */
   .liquid-glass-btn::after {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
     background: radial-gradient(
-      circle at 30% 30%,
-      hsl(0 0% 100% / 0.12),
-      transparent 50%
+      circle,
+      hsl(0 0% 100% / 0.2),
+      hsl(0 0% 100% / 0.08) 40%,
+      transparent 70%
     );
+    transform: translate(-50%, -50%);
+    transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                height 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                opacity 0.4s ease;
     opacity: 0;
-    transition: opacity 0.5s ease;
   }
 
   .liquid-glass-btn:hover {
-    border-color: hsl(0 0% 100% / 0.22);
+    border-color: hsl(0 0% 100% / 0.25);
     background: linear-gradient(
-      135deg,
-      hsl(0 0% 100% / 0.12),
-      hsl(0 0% 100% / 0.06),
-      hsl(0 0% 100% / 0.03)
+      160deg,
+      hsl(0 0% 100% / 0.18),
+      hsl(0 0% 100% / 0.08) 40%,
+      hsl(0 0% 100% / 0.04) 60%,
+      hsl(0 0% 100% / 0.12)
     );
     box-shadow:
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.15),
-      inset 0 -1px 0 0 hsl(0 0% 0% / 0.15),
-      0 8px 32px hsl(0 0% 0% / 0.3),
-      0 0 30px hsl(0 0% 100% / 0.04);
-    transform: translateY(-1px);
+      inset 0 1px 2px 0 hsl(0 0% 100% / 0.2),
+      inset 0 -0.5px 0 0 hsl(0 0% 0% / 0.1),
+      0 8px 24px hsl(0 0% 0% / 0.2),
+      0 0 0 0.5px hsl(0 0% 100% / 0.1),
+      0 0 40px hsl(var(--primary) / 0.08);
+    transform: translateY(-1px) scale(1.02);
   }
 
   .liquid-glass-btn:hover::before {
     opacity: 1;
+    height: 55%;
   }
 
   .liquid-glass-btn:hover::after {
+    width: 200%;
+    height: 200%;
     opacity: 1;
   }
 
   .liquid-glass-btn:active {
-    transform: translateY(0px) scale(0.98);
+    transform: translateY(1px) scale(0.97);
+    transition-duration: 0.1s;
     box-shadow:
-      inset 0 2px 4px hsl(0 0% 0% / 0.2),
-      0 2px 8px hsl(0 0% 0% / 0.15);
+      inset 0 2px 6px hsl(0 0% 0% / 0.15),
+      0 1px 4px hsl(0 0% 0% / 0.1);
   }
 
-  /* Solid liquid glass variant - also transparent, just slightly more visible */
+  .liquid-glass-btn:active::after {
+    width: 300%;
+    height: 300%;
+    opacity: 0.5;
+    transition-duration: 0.15s;
+  }
+
+  /* Solid liquid glass variant - more prominent */
   .liquid-glass-solid {
     background: linear-gradient(
-      135deg,
-      hsl(0 0% 100% / 0.14),
-      hsl(0 0% 100% / 0.08),
-      hsl(0 0% 100% / 0.05)
+      160deg,
+      hsl(0 0% 100% / 0.2),
+      hsl(0 0% 100% / 0.1) 40%,
+      hsl(0 0% 100% / 0.06) 60%,
+      hsl(0 0% 100% / 0.14)
     );
-    border: 1px solid hsl(0 0% 100% / 0.18);
+    border: 1px solid hsl(0 0% 100% / 0.22);
+    border-radius: 100px;
     box-shadow:
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.15),
-      inset 0 0 20px hsl(0 0% 100% / 0.03),
-      0 4px 20px hsl(0 0% 0% / 0.25);
-    backdrop-filter: blur(40px) saturate(1.8);
-    -webkit-backdrop-filter: blur(40px) saturate(1.8);
+      inset 0 1px 2px 0 hsl(0 0% 100% / 0.18),
+      inset 0 0 16px hsl(0 0% 100% / 0.04),
+      0 4px 16px hsl(0 0% 0% / 0.2),
+      0 0 0 0.5px hsl(0 0% 100% / 0.08);
+    backdrop-filter: blur(48px) saturate(2);
+    -webkit-backdrop-filter: blur(48px) saturate(2);
   }
 
   .liquid-glass-solid:hover {
     background: linear-gradient(
-      135deg,
-      hsl(0 0% 100% / 0.18),
-      hsl(0 0% 100% / 0.1),
-      hsl(0 0% 100% / 0.06)
+      160deg,
+      hsl(0 0% 100% / 0.26),
+      hsl(0 0% 100% / 0.14) 40%,
+      hsl(0 0% 100% / 0.08) 60%,
+      hsl(0 0% 100% / 0.18)
     );
-    border-color: hsl(0 0% 100% / 0.25);
+    border-color: hsl(0 0% 100% / 0.3);
     box-shadow:
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.2),
-      inset 0 0 30px hsl(0 0% 100% / 0.04),
-      0 8px 40px hsl(0 0% 0% / 0.35),
-      0 0 40px hsl(0 0% 100% / 0.05);
+      inset 0 1px 2px 0 hsl(0 0% 100% / 0.25),
+      inset 0 0 24px hsl(0 0% 100% / 0.05),
+      0 8px 32px hsl(0 0% 0% / 0.3),
+      0 0 50px hsl(var(--primary) / 0.1);
   }
 }
 

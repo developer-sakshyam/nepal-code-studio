@@ -23,11 +23,11 @@ const buttonVariants = cva(
         glass: "liquid-glass-btn text-foreground",
       },
       size: {
-        default: "h-10 px-5 py-2",
-        sm: "h-9 rounded-xl px-4",
-        lg: "h-12 rounded-2xl px-8 text-base",
-        xl: "h-14 rounded-2xl px-10 text-lg",
-        icon: "h-10 w-10 rounded-xl",
+        default: "h-10 px-6 py-2",
+        sm: "h-9 rounded-full px-5",
+        lg: "h-12 rounded-full px-8 text-base",
+        xl: "h-14 rounded-full px-10 text-lg",
+        icon: "h-10 w-10 rounded-full",
       },
     },
     defaultVariants: {
