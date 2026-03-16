@@ -55,12 +55,10 @@ const Checkout = () => {
     }, 2000);
   };
 
-  const [isDownloading, setIsDownloading] = useState(false);
-
   const handleDownload = async () => {
     setIsDownloading(true);
     try {
-      await downloadProductCode(product);
+      await downloadProductCode(product!);
     } finally {
       setIsDownloading(false);
     }
