@@ -209,10 +209,14 @@ const FeaturesSection = () => {
 
 const FeaturedProductsSection = () => {
   const featuredProducts = products.filter((p) => p.featured).slice(0, 3);
+  const [previewProduct, setPreviewProduct] = useState<Product | null>(null);
 
   return (
-    <section className="py-24">
-      <div className="container mx-auto px-4">
+    <section className="py-24 relative">
+      {/* Floating 3D objects */}
+      <FloatingScene className="absolute inset-0 opacity-40" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection className="text-center mb-16">
           <h2 className="font-display font-bold text-3xl md:text-4xl mb-4">
             Featured <span className="gradient-text">Products</span>
@@ -225,10 +229,10 @@ const FeaturedProductsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProducts.map((product, index) => (
             <AnimatedSection key={product.id} delay={index * 0.1}>
-              <Link to={`/products/${product.id}`}>
-                <GlassCard className="h-full overflow-hidden group cursor-pointer">
-                  {/* Image */}
-                  <div className="relative h-48 -mx-6 -mt-6 mb-6 overflow-hidden">
+              <GlassCard className="h-full overflow-hidden group cursor-pointer">
+                {/* Image */}
+                <div className="relative h-48 -mx-6 -mt-6 mb-6 overflow-hidden">
+                  <Link to={`/products/${product.id}`}>
                     <motion.img
                       src={product.image}
                       alt={product.name}
@@ -236,14 +240,28 @@ const FeaturedProductsSection = () => {
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.4 }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 text-xs rounded-full bg-primary/90 text-primary-foreground font-medium">
-                        {product.category}
-                      </span>
-                    </div>
+                  </Link>
+                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent pointer-events-none" />
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 text-xs rounded-full bg-primary/90 text-primary-foreground font-medium">
+                      {product.category}
+                    </span>
                   </div>
+                  {/* Preview button */}
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    whileHover={{ scale: 1.1 }}
+                    className="absolute bottom-4 right-4 w-10 h-10 rounded-full glass-card flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setPreviewProduct(product);
+                    }}
+                  >
+                    <Eye className="w-4 h-4 text-foreground" />
+                  </motion.button>
+                </div>
 
+                <Link to={`/products/${product.id}`}>
                   {/* Content */}
                   <h3 className="font-display font-semibold text-xl mb-2 group-hover:text-primary transition-colors">
                     {product.name}
@@ -282,8 +300,8 @@ const FeaturedProductsSection = () => {
                       <ArrowRight className="w-5 h-5" />
                     </motion.div>
                   </div>
-                </GlassCard>
-              </Link>
+                </Link>
+              </GlassCard>
             </AnimatedSection>
           ))}
         </div>
@@ -297,6 +315,15 @@ const FeaturedProductsSection = () => {
           </Button>
         </AnimatedSection>
       </div>
+
+      {/* Preview Modal */}
+      {previewProduct && (
+        <ProductPreviewModal
+          product={previewProduct}
+          isOpen={!!previewProduct}
+          onClose={() => setPreviewProduct(null)}
+        />
+      )}
     </section>
   );
 };

@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Search, Filter, X } from "lucide-react";
+import { ArrowRight, Search, Filter, X, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Layout } from "@/components/Layout";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlassCard } from "@/components/GlassCard";
-import { products, categories } from "@/data/products";
+import { products, categories, Product } from "@/data/products";
+import { ProductPreviewModal } from "@/components/ProductPreviewModal";
 
 const Products = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [previewProduct, setPreviewProduct] = useState<Product | null>(null);
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
@@ -45,7 +47,6 @@ const Products = () => {
       <section className="py-6 sticky top-16 md:top-20 z-40 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4">
-            {/* Search */}
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
@@ -56,8 +57,6 @@ const Products = () => {
                 className="pl-10 bg-muted/50 border-border/50 focus:border-primary"
               />
             </div>
-
-            {/* Category Filters */}
             <div className="flex items-center gap-2 flex-wrap">
               <Filter className="w-4 h-4 text-muted-foreground hidden md:block" />
               <motion.button
@@ -124,10 +123,10 @@ const Products = () => {
                     transition={{ delay: index * 0.05 }}
                     layout
                   >
-                    <Link to={`/products/${product.id}`}>
-                      <GlassCard className="h-full overflow-hidden group cursor-pointer">
-                        {/* Image */}
-                        <div className="relative h-48 -mx-6 -mt-6 mb-6 overflow-hidden">
+                    <GlassCard className="h-full overflow-hidden group cursor-pointer">
+                      {/* Image */}
+                      <div className="relative h-48 -mx-6 -mt-6 mb-6 overflow-hidden">
+                        <Link to={`/products/${product.id}`}>
                           <motion.img
                             src={product.image}
                             alt={product.name}
@@ -135,30 +134,40 @@ const Products = () => {
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.4 }}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                          <div className="absolute top-4 right-4">
-                            <span className="px-3 py-1 text-xs rounded-full bg-primary/90 text-primary-foreground font-medium">
-                              {product.category}
+                        </Link>
+                        <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent pointer-events-none" />
+                        <div className="absolute top-4 right-4">
+                          <span className="px-3 py-1 text-xs rounded-full bg-primary/90 text-primary-foreground font-medium">
+                            {product.category}
+                          </span>
+                        </div>
+                        {product.featured && (
+                          <div className="absolute top-4 left-4">
+                            <span className="px-3 py-1 text-xs rounded-full bg-secondary/90 text-secondary-foreground font-medium">
+                              Featured
                             </span>
                           </div>
-                          {product.featured && (
-                            <div className="absolute top-4 left-4">
-                              <span className="px-3 py-1 text-xs rounded-full bg-secondary/90 text-secondary-foreground font-medium">
-                                Featured
-                              </span>
-                            </div>
-                          )}
-                        </div>
+                        )}
+                        {/* Preview button */}
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          className="absolute bottom-4 right-4 w-10 h-10 rounded-full glass-card flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPreviewProduct(product);
+                          }}
+                        >
+                          <Eye className="w-4 h-4 text-foreground" />
+                        </motion.button>
+                      </div>
 
-                        {/* Content */}
+                      <Link to={`/products/${product.id}`}>
                         <h3 className="font-display font-semibold text-xl mb-2 group-hover:text-primary transition-colors">
                           {product.name}
                         </h3>
                         <p className="text-muted-foreground text-sm mb-4">
                           {product.tagline}
                         </p>
-
-                        {/* Tech Stack */}
                         <div className="flex flex-wrap gap-2 mb-4">
                           {product.techStack.slice(0, 4).map((tech) => (
                             <motion.span
@@ -170,8 +179,6 @@ const Products = () => {
                             </motion.span>
                           ))}
                         </div>
-
-                        {/* Price */}
                         <div className="flex items-center justify-between pt-4 border-t border-border/50">
                           <div>
                             <span className="font-display font-bold text-2xl text-primary">
@@ -181,15 +188,12 @@ const Products = () => {
                               (~${product.priceUSD})
                             </span>
                           </div>
-                          <motion.div
-                            whileHover={{ x: 5 }}
-                            className="text-primary"
-                          >
+                          <motion.div whileHover={{ x: 5 }} className="text-primary">
                             <ArrowRight className="w-5 h-5" />
                           </motion.div>
                         </div>
-                      </GlassCard>
-                    </Link>
+                      </Link>
+                    </GlassCard>
                   </motion.div>
                 ))}
               </motion.div>
@@ -204,12 +208,8 @@ const Products = () => {
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-muted flex items-center justify-center">
                   <Search className="w-8 h-8 text-muted-foreground" />
                 </div>
-                <h3 className="font-display font-semibold text-xl mb-2">
-                  No products found
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  Try adjusting your search or filter criteria.
-                </p>
+                <h3 className="font-display font-semibold text-xl mb-2">No products found</h3>
+                <p className="text-muted-foreground mb-6">Try adjusting your search or filter criteria.</p>
                 <Button
                   variant="outline"
                   onClick={() => {
@@ -224,6 +224,15 @@ const Products = () => {
           </AnimatePresence>
         </div>
       </section>
+
+      {/* Preview Modal */}
+      {previewProduct && (
+        <ProductPreviewModal
+          product={previewProduct}
+          isOpen={!!previewProduct}
+          onClose={() => setPreviewProduct(null)}
+        />
+      )}
     </Layout>
   );
 };
