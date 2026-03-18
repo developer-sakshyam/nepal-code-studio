@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
@@ -8,13 +9,17 @@ import {
   Sparkles,
   Package,
   Star,
-  ChevronDown
+  ChevronDown,
+  Eye
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/Layout";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlassCard } from "@/components/GlassCard";
-import { products } from "@/data/products";
+import { products, Product } from "@/data/products";
+import { HeroParticles } from "@/components/HeroParticles";
+import { FloatingScene } from "@/components/FloatingScene";
+import { ProductPreviewModal } from "@/components/ProductPreviewModal";
 
 const HeroSection = () => {
   const titleWords = ["Premium", "Source", "Code", "for", "Modern", "Developers"];
