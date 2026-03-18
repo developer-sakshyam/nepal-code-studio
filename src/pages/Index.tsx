@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
@@ -8,58 +9,37 @@ import {
   Sparkles,
   Package,
   Star,
-  ChevronDown
+  ChevronDown,
+  Eye
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/Layout";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlassCard } from "@/components/GlassCard";
-import { products } from "@/data/products";
+import { products, Product } from "@/data/products";
+import { HeroParticles } from "@/components/HeroParticles";
+import { FloatingScene } from "@/components/FloatingScene";
+import { ProductPreviewModal } from "@/components/ProductPreviewModal";
 
 const HeroSection = () => {
   const titleWords = ["Premium", "Source", "Code", "for", "Modern", "Developers"];
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Animated particles background */}
+      <HeroParticles />
+      
+      {/* Mesh gradient blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
+          animate={{ x: [0, 50, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-3xl"
-          animate={{
-            x: [0, -30, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-primary/10 to-transparent rounded-full"
-          animate={{
-            scale: [1, 1.05, 1],
-            opacity: [0.5, 0.7, 0.5],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/15 rounded-full blur-3xl"
+          animate={{ x: [0, -30, 0], y: [0, -50, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -229,10 +209,14 @@ const FeaturesSection = () => {
 
 const FeaturedProductsSection = () => {
   const featuredProducts = products.filter((p) => p.featured).slice(0, 3);
+  const [previewProduct, setPreviewProduct] = useState<Product | null>(null);
 
   return (
-    <section className="py-24">
-      <div className="container mx-auto px-4">
+    <section className="py-24 relative">
+      {/* Floating 3D objects */}
+      <FloatingScene className="absolute inset-0 opacity-40" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection className="text-center mb-16">
           <h2 className="font-display font-bold text-3xl md:text-4xl mb-4">
             Featured <span className="gradient-text">Products</span>
@@ -245,10 +229,10 @@ const FeaturedProductsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProducts.map((product, index) => (
             <AnimatedSection key={product.id} delay={index * 0.1}>
-              <Link to={`/products/${product.id}`}>
-                <GlassCard className="h-full overflow-hidden group cursor-pointer">
-                  {/* Image */}
-                  <div className="relative h-48 -mx-6 -mt-6 mb-6 overflow-hidden">
+              <GlassCard className="h-full overflow-hidden group cursor-pointer">
+                {/* Image */}
+                <div className="relative h-48 -mx-6 -mt-6 mb-6 overflow-hidden">
+                  <Link to={`/products/${product.id}`}>
                     <motion.img
                       src={product.image}
                       alt={product.name}
@@ -256,14 +240,28 @@ const FeaturedProductsSection = () => {
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.4 }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 text-xs rounded-full bg-primary/90 text-primary-foreground font-medium">
-                        {product.category}
-                      </span>
-                    </div>
+                  </Link>
+                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent pointer-events-none" />
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 text-xs rounded-full bg-primary/90 text-primary-foreground font-medium">
+                      {product.category}
+                    </span>
                   </div>
+                  {/* Preview button */}
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    whileHover={{ scale: 1.1 }}
+                    className="absolute bottom-4 right-4 w-10 h-10 rounded-full glass-card flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setPreviewProduct(product);
+                    }}
+                  >
+                    <Eye className="w-4 h-4 text-foreground" />
+                  </motion.button>
+                </div>
 
+                <Link to={`/products/${product.id}`}>
                   {/* Content */}
                   <h3 className="font-display font-semibold text-xl mb-2 group-hover:text-primary transition-colors">
                     {product.name}
@@ -302,8 +300,8 @@ const FeaturedProductsSection = () => {
                       <ArrowRight className="w-5 h-5" />
                     </motion.div>
                   </div>
-                </GlassCard>
-              </Link>
+                </Link>
+              </GlassCard>
             </AnimatedSection>
           ))}
         </div>
@@ -317,6 +315,15 @@ const FeaturedProductsSection = () => {
           </Button>
         </AnimatedSection>
       </div>
+
+      {/* Preview Modal */}
+      {previewProduct && (
+        <ProductPreviewModal
+          product={previewProduct}
+          isOpen={!!previewProduct}
+          onClose={() => setPreviewProduct(null)}
+        />
+      )}
     </section>
   );
 };
