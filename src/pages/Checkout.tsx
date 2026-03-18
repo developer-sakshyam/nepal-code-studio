@@ -15,7 +15,17 @@ import { Layout } from "@/components/Layout";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlassCard } from "@/components/GlassCard";
 import { products } from "@/data/products";
-import { downloadProductCode } from "@/utils/generateProductCode";
+import { generateProductZip } from "@/utils/generateProductCode";
+
+const downloadProductCode = async (product: any) => {
+  const blob = await generateProductZip(product);
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${product.id}-source-code.zip`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
 
 const steps = [
   { id: 1, name: "Order Review" },
